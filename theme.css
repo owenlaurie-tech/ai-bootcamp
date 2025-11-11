@@ -1,0 +1,282 @@
+/* ============================================
+   Apple/iOS Design System - Theme Variables
+   ============================================ */
+
+/* ============================================
+   Light Theme (Default)
+   ============================================ */
+:root {
+    /* Primary Colors */
+    --ios-blue: #007AFF;
+    --ios-blue-hover: #0051D5;
+    --ios-blue-light: #E3F2FD;
+
+    /* iOS System Colors */
+    --ios-red: #FF3B30;
+    --ios-orange: #FF9500;
+    --ios-yellow: #FFCC00;
+    --ios-green: #34C759;
+    --ios-mint: #00C7BE;
+    --ios-teal: #30B0C7;
+    --ios-cyan: #32ADE6;
+    --ios-indigo: #5856D6;
+    --ios-purple: #AF52DE;
+    --ios-pink: #FF2D55;
+    --ios-brown: #A2845E;
+    --ios-gray: #8E8E93;
+
+    /* Label Colors */
+    --label-primary: rgba(0, 0, 0, 0.85);
+    --label-secondary: rgba(60, 60, 67, 0.6);
+    --label-tertiary: rgba(60, 60, 67, 0.3);
+    --label-quaternary: rgba(60, 60, 67, 0.18);
+
+    /* Background Colors */
+    --bg-primary: #FFFFFF;
+    --bg-secondary: #F2F2F7;
+    --bg-tertiary: #FFFFFF;
+    --bg-grouped: #F2F2F7;
+    --bg-elevated: #FFFFFF;
+
+    /* Fill Colors (for buttons, inputs) */
+    --fill-primary: rgba(120, 120, 128, 0.2);
+    --fill-secondary: rgba(120, 120, 128, 0.16);
+    --fill-tertiary: rgba(118, 118, 128, 0.12);
+    --fill-quaternary: rgba(116, 116, 128, 0.08);
+
+    /* Separator Colors */
+    --separator: rgba(60, 60, 67, 0.29);
+    --separator-opaque: #C6C6C8;
+
+    /* Glassmorphism */
+    --glass-bg: rgba(255, 255, 255, 0.72);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --glass-shadow: rgba(31, 38, 135, 0.15);
+
+    /* Shadows - Apple's multi-layer approach */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 3px 6px rgba(0, 0, 0, 0.10), 0 2px 4px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.10), 0 3px 6px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 15px 25px rgba(0, 0, 0, 0.15), 0 5px 10px rgba(0, 0, 0, 0.05);
+    --shadow-2xl: 0 20px 40px rgba(0, 0, 0, 0.20), 0 10px 15px rgba(0, 0, 0, 0.10);
+
+    /* Priority Colors */
+    --priority-urgent: #FF3B30;
+    --priority-high: #FF9500;
+    --priority-medium: #FFCC00;
+    --priority-low: #34C759;
+    --priority-none: #8E8E93;
+
+    /* Category Colors */
+    --cat-work: #007AFF;
+    --cat-personal: #AF52DE;
+    --cat-shopping: #FF9500;
+    --cat-health: #FF3B30;
+    --cat-finance: #34C759;
+    --cat-home: #A2845E;
+
+    /* Spacing System (8pt grid) */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 12px;
+    --space-base: 16px;
+    --space-lg: 20px;
+    --space-xl: 24px;
+    --space-2xl: 32px;
+    --space-3xl: 40px;
+    --space-4xl: 48px;
+    --space-5xl: 64px;
+
+    /* Border Radius */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --radius-2xl: 20px;
+    --radius-full: 9999px;
+
+    /* Typography Scale */
+    --font-xs: 11px;
+    --font-sm: 13px;
+    --font-base: 16px;
+    --font-lg: 17px;
+    --font-xl: 20px;
+    --font-2xl: 24px;
+    --font-3xl: 28px;
+    --font-4xl: 34px;
+    --font-5xl: 40px;
+
+    /* Font Weights */
+    --font-normal: 400;
+    --font-medium: 500;
+    --font-semibold: 600;
+    --font-bold: 700;
+
+    /* Line Heights */
+    --leading-tight: 1.2;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.6;
+
+    /* Transitions */
+    --transition-fast: 150ms;
+    --transition-base: 250ms;
+    --transition-slow: 350ms;
+
+    /* Easing Functions */
+    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-out: cubic-bezier(0, 0, 0.2, 1);
+    --ease-in: cubic-bezier(0.4, 0, 1, 1);
+    --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    /* Z-index Scale */
+    --z-base: 0;
+    --z-dropdown: 100;
+    --z-sticky: 200;
+    --z-fixed: 300;
+    --z-modal-backdrop: 400;
+    --z-modal: 500;
+    --z-popover: 600;
+    --z-tooltip: 700;
+}
+
+/* ============================================
+   Dark Theme
+   ============================================ */
+[data-theme="dark"] {
+    /* Primary Colors */
+    --ios-blue: #0A84FF;
+    --ios-blue-hover: #409CFF;
+    --ios-blue-light: #1C3A5E;
+
+    /* iOS System Colors (Dark variants) */
+    --ios-red: #FF453A;
+    --ios-orange: #FF9F0A;
+    --ios-yellow: #FFD60A;
+    --ios-green: #30D158;
+    --ios-mint: #63E6E2;
+    --ios-teal: #40C8E0;
+    --ios-cyan: #64D2FF;
+    --ios-indigo: #5E5CE6;
+    --ios-purple: #BF5AF2;
+    --ios-pink: #FF375F;
+    --ios-brown: #AC8E68;
+    --ios-gray: #98989D;
+
+    /* Label Colors */
+    --label-primary: rgba(255, 255, 255, 0.85);
+    --label-secondary: rgba(235, 235, 245, 0.6);
+    --label-tertiary: rgba(235, 235, 245, 0.3);
+    --label-quaternary: rgba(235, 235, 245, 0.18);
+
+    /* Background Colors */
+    --bg-primary: #000000;
+    --bg-secondary: #1C1C1E;
+    --bg-tertiary: #2C2C2E;
+    --bg-grouped: #000000;
+    --bg-elevated: #1C1C1E;
+
+    /* Fill Colors */
+    --fill-primary: rgba(120, 120, 128, 0.36);
+    --fill-secondary: rgba(120, 120, 128, 0.32);
+    --fill-tertiary: rgba(118, 118, 128, 0.24);
+    --fill-quaternary: rgba(116, 116, 128, 0.18);
+
+    /* Separator Colors */
+    --separator: rgba(84, 84, 88, 0.6);
+    --separator-opaque: #38383A;
+
+    /* Glassmorphism */
+    --glass-bg: rgba(28, 28, 30, 0.72);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-shadow: rgba(0, 0, 0, 0.37);
+
+    /* Shadows - adjusted for dark mode */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 3px 6px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.5), 0 3px 6px rgba(0, 0, 0, 0.4);
+    --shadow-xl: 0 15px 25px rgba(0, 0, 0, 0.6), 0 5px 10px rgba(0, 0, 0, 0.5);
+    --shadow-2xl: 0 20px 40px rgba(0, 0, 0, 0.7), 0 10px 15px rgba(0, 0, 0, 0.6);
+
+    /* Priority Colors (adjusted for dark mode) */
+    --priority-urgent: #FF453A;
+    --priority-high: #FF9F0A;
+    --priority-medium: #FFD60A;
+    --priority-low: #30D158;
+    --priority-none: #98989D;
+
+    /* Category Colors (adjusted for dark mode) */
+    --cat-work: #0A84FF;
+    --cat-personal: #BF5AF2;
+    --cat-shopping: #FF9F0A;
+    --cat-health: #FF453A;
+    --cat-finance: #30D158;
+    --cat-home: #AC8E68;
+}
+
+/* ============================================
+   System Preference Detection
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        /* Inherit all dark theme variables */
+        --ios-blue: #0A84FF;
+        --ios-blue-hover: #409CFF;
+        --ios-blue-light: #1C3A5E;
+        --ios-red: #FF453A;
+        --ios-orange: #FF9F0A;
+        --ios-yellow: #FFD60A;
+        --ios-green: #30D158;
+        --label-primary: rgba(255, 255, 255, 0.85);
+        --label-secondary: rgba(235, 235, 245, 0.6);
+        --label-tertiary: rgba(235, 235, 245, 0.3);
+        --bg-primary: #000000;
+        --bg-secondary: #1C1C1E;
+        --bg-tertiary: #2C2C2E;
+        --glass-bg: rgba(28, 28, 30, 0.72);
+        --glass-border: rgba(255, 255, 255, 0.1);
+        --separator: rgba(84, 84, 88, 0.6);
+    }
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+
+/* Glassmorphism Effect */
+.glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border);
+}
+
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-lg), inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-xl);
+}
+
+/* Shadow Utilities */
+.shadow-sm { box-shadow: var(--shadow-sm); }
+.shadow-md { box-shadow: var(--shadow-md); }
+.shadow-lg { box-shadow: var(--shadow-lg); }
+.shadow-xl { box-shadow: var(--shadow-xl); }
+.shadow-2xl { box-shadow: var(--shadow-2xl); }
+
+/* Transition Utilities */
+.transition-fast { transition: all var(--transition-fast) var(--ease-in-out); }
+.transition-base { transition: all var(--transition-base) var(--ease-in-out); }
+.transition-slow { transition: all var(--transition-slow) var(--ease-in-out); }
+
+/* Button Press Effect (iOS style) */
+.btn-press {
+    transition: transform 100ms var(--ease-out);
+}
+
+.btn-press:active {
+    transform: scale(0.97);
+}

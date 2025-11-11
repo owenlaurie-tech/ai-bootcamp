@@ -3,26 +3,277 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do App</title>
+    <title>Tasks - Apple Style To-Do App</title>
+    <link rel="stylesheet" href="theme.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>My To-Do List</h1>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <h1 class="app-title">Tasks</h1>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <span id="themeIcon">☀️</span>
+            </button>
+        </header>
 
-        <div class="input-section">
-            <input type="text" id="taskInput" placeholder="Add a new task..." />
-            <button id="addBtn">Add Task</button>
+        <!-- Main Container -->
+        <div class="container">
+            <!-- Filter Panel -->
+            <div class="filter-panel">
+                <button class="filter-toggle" id="filterToggle" aria-expanded="false">
+                    <span>🔍 Filters</span>
+                    <span class="filter-badge" id="filterBadge" hidden>0</span>
+                </button>
+                <div class="filter-options" id="filterOptions">
+                    <div class="option-group">
+                        <label>Status</label>
+                        <div class="quick-actions">
+                            <button class="quick-btn active" data-filter="status" data-value="all">All</button>
+                            <button class="quick-btn" data-filter="status" data-value="active">Active</button>
+                            <button class="quick-btn" data-filter="status" data-value="completed">Completed</button>
+                        </div>
+                    </div>
+                    <div class="option-group">
+                        <label>Due Date</label>
+                        <div class="quick-actions">
+                            <button class="quick-btn" data-filter="date" data-value="overdue">Overdue</button>
+                            <button class="quick-btn" data-filter="date" data-value="today">Today</button>
+                            <button class="quick-btn" data-filter="date" data-value="week">This Week</button>
+                        </div>
+                    </div>
+                    <div class="option-group">
+                        <label>Priority</label>
+                        <div class="priority-buttons">
+                            <button class="priority-btn" data-filter="priority" data-value="urgent">
+                                <span class="priority-indicator priority-urgent"></span> Urgent
+                            </button>
+                            <button class="priority-btn" data-filter="priority" data-value="high">
+                                <span class="priority-indicator priority-high"></span> High
+                            </button>
+                            <button class="priority-btn" data-filter="priority" data-value="medium">
+                                <span class="priority-indicator priority-medium"></span> Medium
+                            </button>
+                            <button class="priority-btn" data-filter="priority" data-value="low">
+                                <span class="priority-indicator priority-low"></span> Low
+                            </button>
+                        </div>
+                    </div>
+                    <button class="quick-btn" id="clearFilters" style="width: 100%; margin-top: 8px;">Clear All Filters</button>
+                </div>
+            </div>
+
+            <!-- Task Input Section -->
+            <div class="input-section">
+                <input type="text" id="taskInput" placeholder="What do you want to do?" />
+                <button id="addBtn">Add</button>
+            </div>
+
+            <!-- Advanced Options -->
+            <div class="advanced-options" id="advancedOptions">
+                <div class="option-group">
+                    <label>Due Date</label>
+                    <input type="date" id="dueDateInput" />
+                </div>
+                <div class="option-group">
+                    <label>Due Time</label>
+                    <input type="time" id="dueTimeInput" />
+                </div>
+                <div class="option-group">
+                    <label>Priority</label>
+                    <div class="priority-buttons">
+                        <button class="priority-btn selected" data-priority="none">
+                            <span class="priority-indicator priority-none"></span> None
+                        </button>
+                        <button class="priority-btn" data-priority="low">
+                            <span class="priority-indicator priority-low"></span> Low
+                        </button>
+                        <button class="priority-btn" data-priority="medium">
+                            <span class="priority-indicator priority-medium"></span> Medium
+                        </button>
+                        <button class="priority-btn" data-priority="high">
+                            <span class="priority-indicator priority-high"></span> High
+                        </button>
+                        <button class="priority-btn" data-priority="urgent">
+                            <span class="priority-indicator priority-urgent"></span> Urgent
+                        </button>
+                    </div>
+                </div>
+                <div class="option-group">
+                    <label>Category</label>
+                    <select id="categoryInput">
+                        <option value="">No category</option>
+                        <option value="work">💼 Work</option>
+                        <option value="personal">👤 Personal</option>
+                        <option value="shopping">🛒 Shopping</option>
+                        <option value="health">❤️ Health</option>
+                        <option value="finance">💰 Finance</option>
+                        <option value="home">🏠 Home</option>
+                    </select>
+                </div>
+                <div class="option-group">
+                    <label>Tags (comma separated)</label>
+                    <input type="text" id="tagsInput" placeholder="urgent, important, etc." />
+                </div>
+                <div class="option-group">
+                    <label>
+                        <input type="checkbox" id="recurringCheckbox" style="width: auto; margin-right: 8px;" />
+                        Recurring Task
+                    </label>
+                    <div id="recurringOptions" style="display: none; margin-top: 8px;">
+                        <select id="recurringPattern" style="width: 100%;">
+                            <option value="daily">Daily</option>
+                            <option value="weekly">Weekly</option>
+                            <option value="monthly">Monthly</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions for Options -->
+            <div class="quick-actions">
+                <button class="quick-btn" id="dueDateBtn">📅 Due Date</button>
+                <button class="quick-btn" id="priorityBtn">⚡ Priority</button>
+                <button class="quick-btn" id="categoryBtn">🏷️ Category</button>
+                <button class="quick-btn" id="moreOptionsBtn">⋯ More</button>
+            </div>
+
+            <!-- Task List -->
+            <ul id="taskList"></ul>
+
+            <!-- Empty State (hidden by default) -->
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <div class="empty-state-icon">✨</div>
+                <p class="empty-state-text">No tasks yet. Add one to get started!</p>
+            </div>
+
+            <!-- Footer -->
+            <div class="footer">
+                <span id="taskCount">0 tasks</span>
+                <button id="clearCompleted">Clear Completed</button>
+            </div>
         </div>
+    </div>
 
-        <ul id="taskList"></ul>
+    <!-- Bulk Operations Toolbar -->
+    <div class="bulk-toolbar" id="bulkToolbar">
+        <div class="bulk-toolbar-content">
+            <span id="selectionCount">0 selected</span>
+            <div class="bulk-actions">
+                <button class="bulk-btn" id="bulkComplete">✓ Complete</button>
+                <button class="bulk-btn" id="bulkDelete">🗑️ Delete</button>
+                <button class="bulk-btn" id="bulkClear">✕ Clear Selection</button>
+            </div>
+        </div>
+    </div>
 
-        <div class="footer">
-            <span id="taskCount">0 tasks</span>
-            <button id="clearCompleted">Clear Completed</button>
+    <!-- Keyboard Shortcuts Modal -->
+    <div class="modal" id="shortcutsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Keyboard Shortcuts</h2>
+                <button class="close-btn" id="closeShortcuts" aria-label="Close">&times;</button>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px;">
+                <div>
+                    <h3 style="font-size: 14px; margin-bottom: 12px; color: var(--label-secondary);">ACTIONS</h3>
+                    <div style="display: grid; gap: 8px;">
+                        <div><kbd>N</kbd> <span style="color: var(--label-secondary);">New Task</span></div>
+                        <div><kbd>Enter</kbd> <span style="color: var(--label-secondary);">Add Task</span></div>
+                        <div><kbd>/</kbd> <span style="color: var(--label-secondary);">Search</span></div>
+                        <div><kbd>?</kbd> <span style="color: var(--label-secondary);">Help</span></div>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="font-size: 14px; margin-bottom: 12px; color: var(--label-secondary);">FILTERS</h3>
+                    <div style="display: grid; gap: 8px;">
+                        <div><kbd>F</kbd> <span style="color: var(--label-secondary);">Toggle Filters</span></div>
+                        <div><kbd>1-4</kbd> <span style="color: var(--label-secondary);">Priority Filter</span></div>
+                        <div><kbd>T</kbd> <span style="color: var(--label-secondary);">Today's Tasks</span></div>
+                        <div><kbd>A</kbd> <span style="color: var(--label-secondary);">All Tasks</span></div>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="font-size: 14px; margin-bottom: 12px; color: var(--label-secondary);">SELECTION</h3>
+                    <div style="display: grid; gap: 8px;">
+                        <div><kbd>Shift</kbd> <span style="color: var(--label-secondary);">Multi-select</span></div>
+                        <div><kbd>Ctrl+A</kbd> <span style="color: var(--label-secondary);">Select All</span></div>
+                        <div><kbd>Esc</kbd> <span style="color: var(--label-secondary);">Cancel</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Task Edit Modal -->
+    <div class="modal" id="taskEditModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Task</h2>
+                <button class="close-btn" id="closeEditModal" aria-label="Close">&times;</button>
+            </div>
+            <div class="option-group">
+                <label>Task Description</label>
+                <input type="text" id="editTaskText" style="width: 100%;" />
+            </div>
+            <div class="option-group">
+                <label>Due Date</label>
+                <input type="date" id="editDueDate" style="width: 100%;" />
+            </div>
+            <div class="option-group">
+                <label>Priority</label>
+                <div class="priority-buttons" id="editPriorityButtons">
+                    <button class="priority-btn" data-priority="none">
+                        <span class="priority-indicator priority-none"></span> None
+                    </button>
+                    <button class="priority-btn" data-priority="low">
+                        <span class="priority-indicator priority-low"></span> Low
+                    </button>
+                    <button class="priority-btn" data-priority="medium">
+                        <span class="priority-indicator priority-medium"></span> Medium
+                    </button>
+                    <button class="priority-btn" data-priority="high">
+                        <span class="priority-indicator priority-high"></span> High
+                    </button>
+                    <button class="priority-btn" data-priority="urgent">
+                        <span class="priority-indicator priority-urgent"></span> Urgent
+                    </button>
+                </div>
+            </div>
+            <div class="option-group">
+                <label>Category</label>
+                <select id="editCategory" style="width: 100%;">
+                    <option value="">No category</option>
+                    <option value="work">💼 Work</option>
+                    <option value="personal">👤 Personal</option>
+                    <option value="shopping">🛒 Shopping</option>
+                    <option value="health">❤️ Health</option>
+                    <option value="finance">💰 Finance</option>
+                    <option value="home">🏠 Home</option>
+                </select>
+            </div>
+            <div style="display: flex; gap: 8px; margin-top: 24px;">
+                <button id="saveTaskEdit" style="flex: 1; padding: 12px; background: var(--ios-blue); color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: 600;">Save Changes</button>
+                <button id="cancelTaskEdit" style="padding: 12px 24px; background: var(--fill-tertiary); color: var(--label-primary); border: none; border-radius: 10px; cursor: pointer; font-weight: 600;">Cancel</button>
+            </div>
         </div>
     </div>
 
     <script src="app.js"></script>
+
+    <style>
+        /* Keyboard shortcut styling */
+        kbd {
+            display: inline-block;
+            padding: 3px 8px;
+            font-family: 'SF Mono', Monaco, Consolas, monospace;
+            font-size: 12px;
+            background: var(--fill-secondary);
+            border: 1px solid var(--separator);
+            border-radius: 4px;
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+            margin-right: 8px;
+        }
+    </style>
 </body>
 </html>
